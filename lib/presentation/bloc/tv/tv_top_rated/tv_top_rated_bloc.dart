@@ -11,19 +11,19 @@ part 'tv_top_rated_state.dart';
 class TvTopRatedBloc extends Bloc<TvTopRatedEvent, TvTopRatedState> {
   final GetTopRatedTvUseCase _getTvTopRated;
 
-  TvTopRatedBloc(this._getTvTopRated) : super(Initial()) {
+  TvTopRatedBloc(this._getTvTopRated) : super(TvTopRatedInitial()) {
     on<OnGetTopRated>(_onGetTopRated);
   }
 
   FutureOr<void> _onGetTopRated(
       OnGetTopRated event, Emitter<TvTopRatedState> emit) async {
-    emit(Loading());
+    emit(TvTopRatedLoading());
     final result = await _getTvTopRated.execute();
 
     result.fold((failure) {
-      emit(Error(failure.message));
+      emit(TvTopRatedError(failure.message));
     }, (success) {
-      emit(Success(success));
+      emit(TvTopRatedSuccess(success));
     });
   }
 }

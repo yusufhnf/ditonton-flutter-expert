@@ -54,7 +54,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
                 onTap: () =>
                     Navigator.pushNamed(context, NowPlayingTvPage.ROUTE_NAME),
               ),
-              Consumer<TvListNotifier>(builder: (context, data, child) {
+              BlocBuilder<TvListNotifier>(builder: (context, state) {
                 final state = data.nowPlayingState;
                 if (state == RequestState.Loading) {
                   return Center(
@@ -71,7 +71,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
                 onTap: () =>
                     Navigator.pushNamed(context, PopularTvPage.ROUTE_NAME),
               ),
-              Consumer<TvListNotifier>(builder: (context, data, child) {
+              BlocBuilder<TvListNotifier>(builder: (context, state) {
                 final state = data.popularTvState;
                 if (state == RequestState.Loading) {
                   return Center(
@@ -88,7 +88,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
                 onTap: () =>
                     Navigator.pushNamed(context, TopRatedTvPage.ROUTE_NAME),
               ),
-              Consumer<TvListNotifier>(builder: (context, data, child) {
+              BlocBuilder<TvListNotifier>(builder: (context, state) {
                 final state = data.topRatedTvState;
                 if (state == RequestState.Loading) {
                   return Center(

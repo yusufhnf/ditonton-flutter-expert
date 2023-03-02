@@ -34,7 +34,7 @@ class _TvDetailPageState extends State<TvDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer<TvDetailNotifier>(
+      body: BlocBuilder<TvDetailNotifier>(
         builder: (context, provider, child) {
           if (provider.tvState == RequestState.Loading) {
             return Center(
@@ -228,8 +228,8 @@ class DetailContent extends StatelessWidget {
                               'Recommendations',
                               style: kHeading6,
                             ),
-                            Consumer<TvDetailNotifier>(
-                              builder: (context, data, child) {
+                            BlocBuilder<TvDetailNotifier>(
+                              builder: (context, state) {
                                 if (data.recommendationState ==
                                     RequestState.Loading) {
                                   return Center(

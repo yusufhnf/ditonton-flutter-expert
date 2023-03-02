@@ -21,7 +21,7 @@ class TvWatchlistBloc extends Bloc<TvWatchlistEvent, TvWatchlistState> {
 
   TvWatchlistBloc(this._getWatchlistTv, this._getWatchlistStatus,
       this._removeWatchlist, this._saveWatchlist)
-      : super(Initial()) {
+      : super(TvWatchlistInitial()) {
     on<OnGetWatchlist>(_onGetTvWatchlist);
     on<WatchlistStatus>(_onWatchlistStatus);
     on<AddWatchlist>(_onAddWatchlist);
@@ -30,13 +30,15 @@ class TvWatchlistBloc extends Bloc<TvWatchlistEvent, TvWatchlistState> {
 
   FutureOr<void> _onGetTvWatchlist(
       OnGetWatchlist event, Emitter<TvWatchlistState> emit) async {
-    emit(Loading());
+    emit(TvWatchlistLoading());
     final result = await _getWatchlistTv.execute();
 
     result.fold((failure) {
-      emit(Error(failure.message));
+      emit(TvWatchlistError(failure.message));
     }, (success) {
-      success.isEmpty ? emit(Empty()) : emit(Success(success));
+      success.isEmpty
+          ? emit(TvWatchlistEmpty())
+          : emit(TvWatchlistSuccess(success));
     });
   }
 
@@ -44,7 +46,7 @@ class TvWatchlistBloc extends Bloc<TvWatchlistEvent, TvWatchlistState> {
       WatchlistStatus event, Emitter<TvWatchlistState> emit) async {
     final id = event.tvId;
     final result = await _getWatchlistStatus.execute(id);
-    emit(IsWatchlist(result));
+    emit(TvWatchlistIsWatchlist(result));
   }
 
   FutureOr<void> _onAddWatchlist(
@@ -53,9 +55,9 @@ class TvWatchlistBloc extends Bloc<TvWatchlistEvent, TvWatchlistState> {
 
     final result = await _saveWatchlist.execute(tv);
     result.fold((failure) {
-      emit(Error(failure.message));
+      emit(TvWatchlistError(failure.message));
     }, (success) {
-      emit(SuccessMessage(success));
+      emit(TvWatchlistSuccessMessage(success));
     });
   }
 
@@ -64,9 +66,9 @@ class TvWatchlistBloc extends Bloc<TvWatchlistEvent, TvWatchlistState> {
     final tv = event.tvDetail;
     final result = await _removeWatchlist.execute(tv);
     result.fold((failure) {
-      emit(Error(failure.message));
+      emit(TvWatchlistError(failure.message));
     }, (success) {
-      emit(SuccessMessage(success));
+      emit(TvWatchlistSuccessMessage(success));
     });
   }
 }

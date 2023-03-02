@@ -2,33 +2,33 @@ part of 'movie_now_playing_bloc.dart';
 
 abstract class MovieNowPlayingState extends Equatable {}
 
-class Initial extends MovieNowPlayingState {
+class MovieNowPlayingInitial extends MovieNowPlayingState {
   @override
   List<Object> get props => [];
 }
 
-class Loading extends MovieNowPlayingState {
+class MovieNowPlayingLoading extends MovieNowPlayingState {
   @override
   List<Object> get props => [];
 }
 
-class Success extends MovieNowPlayingState {
+class MovieNowPlayingSuccess extends MovieNowPlayingState {
   final List<Movie> movieResult;
 
-  Success(this.movieResult);
+  MovieNowPlayingSuccess(this.movieResult);
   @override
   List<Object> get props => [movieResult];
 }
 
-class Empty extends MovieNowPlayingState {
+class MovieNowPlayingEmpty extends MovieNowPlayingState {
   @override
   List<Object> get props => [];
 }
 
-class Error extends MovieNowPlayingState {
+class MovieNowPlayingError extends MovieNowPlayingState {
   final String message;
 
-  Error(this.message);
+  MovieNowPlayingError(this.message);
   @override
   List<Object> get props => [message];
 }

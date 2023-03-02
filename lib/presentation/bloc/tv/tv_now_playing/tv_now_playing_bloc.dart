@@ -11,19 +11,19 @@ part 'tv_now_playing_state.dart';
 class TvNowPlayingBloc extends Bloc<TvNowPlayingEvent, TvNowPlayingState> {
   final GetNowPlayingTvUseCase _getTvNowPlaying;
 
-  TvNowPlayingBloc(this._getTvNowPlaying) : super(Initial()) {
+  TvNowPlayingBloc(this._getTvNowPlaying) : super(TvNowPlayingInitial()) {
     on<OnGetNowPlaying>(_onGetNowPlaying);
   }
 
   FutureOr<void> _onGetNowPlaying(
       OnGetNowPlaying event, Emitter<TvNowPlayingState> emit) async {
-    emit(Loading());
+    emit(TvNowPlayingLoading());
     final result = await _getTvNowPlaying.execute();
 
     result.fold((failure) {
-      emit(Error(failure.message));
+      emit(TvNowPlayingError(failure.message));
     }, (success) {
-      emit(Success(success));
+      emit(TvNowPlayingSuccess(success));
     });
   }
 }

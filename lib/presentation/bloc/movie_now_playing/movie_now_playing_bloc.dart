@@ -13,19 +13,20 @@ class MovieNowPlayingBloc
     extends Bloc<MovieNowPlayingEvent, MovieNowPlayingState> {
   final GetNowPlayingMoviesUseCase _getMovieNowPlaying;
 
-  MovieNowPlayingBloc(this._getMovieNowPlaying) : super(Initial()) {
+  MovieNowPlayingBloc(this._getMovieNowPlaying)
+      : super(MovieNowPlayingInitial()) {
     on<OnGetNowPlaying>(_onGetNowPlaying);
   }
 
   FutureOr<void> _onGetNowPlaying(
       OnGetNowPlaying event, Emitter<MovieNowPlayingState> emit) async {
-    emit(Loading());
+    emit(MovieNowPlayingLoading());
     final result = await _getMovieNowPlaying.execute();
 
     result.fold((failure) {
-      emit(Error(failure.message));
+      emit(MovieNowPlayingError(failure.message));
     }, (success) {
-      emit(Success(success));
+      emit(MovieNowPlayingSuccess(success));
     });
   }
 }

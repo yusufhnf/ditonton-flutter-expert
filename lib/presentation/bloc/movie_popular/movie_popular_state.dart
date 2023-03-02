@@ -2,33 +2,33 @@ part of 'movie_popular_bloc.dart';
 
 abstract class MoviePopularState extends Equatable {}
 
-class Initial extends MoviePopularState {
+class MoviePopularInitial extends MoviePopularState {
   @override
   List<Object> get props => [];
 }
 
-class Loading extends MoviePopularState {
+class MoviePopularLoading extends MoviePopularState {
   @override
   List<Object> get props => [];
 }
 
-class Success extends MoviePopularState {
+class MoviePopularSuccess extends MoviePopularState {
   final List<Movie> movieResult;
 
-  Success(this.movieResult);
+  MoviePopularSuccess(this.movieResult);
   @override
   List<Object> get props => [movieResult];
 }
 
-class Empty extends MoviePopularState {
+class MoviePopularEmpty extends MoviePopularState {
   @override
   List<Object> get props => [];
 }
 
-class Error extends MoviePopularState {
+class MoviePopularError extends MoviePopularState {
   final String message;
 
-  Error(this.message);
+  MoviePopularError(this.message);
   @override
   List<Object> get props => [message];
 }

@@ -36,8 +36,8 @@ class TvSearchPage extends StatelessWidget {
               'Search Result',
               style: kHeading6,
             ),
-            Consumer<TvSearchNotifier>(
-              builder: (context, data, child) {
+            BlocBuilder<TvSearchNotifier>(
+              builder: (context, state) {
                 if (data.state == RequestState.Loading) {
                   return Center(
                     child: CircularProgressIndicator(),

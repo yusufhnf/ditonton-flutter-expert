@@ -11,20 +11,22 @@ part 'movie_search_state.dart';
 class MovieSearchBloc extends Bloc<MovieSearchEvent, MovieSearchState> {
   final SearchMoviesUseCase _getMovieSearch;
 
-  MovieSearchBloc(this._getMovieSearch) : super(Empty()) {
+  MovieSearchBloc(this._getMovieSearch) : super(MovieSearchInitial()) {
     on<OnGetSearch>(_onMovieSearch);
   }
 
   FutureOr<void> _onMovieSearch(
       OnGetSearch event, Emitter<MovieSearchState> emit) async {
     final query = event.movieQuery;
-    emit(Loading());
+    emit(MovieSearchLoading());
 
     final result = await _getMovieSearch.execute(query);
     result.fold((failure) {
-      emit(Error(failure.message));
+      emit(MovieSearchError(failure.message));
     }, (success) {
-      success.isEmpty ? emit(Empty()) : emit(Success(success));
+      success.isEmpty
+          ? emit(MovieSearchEmpty())
+          : emit(MovieSearchSuccess(success));
     });
   }
 }

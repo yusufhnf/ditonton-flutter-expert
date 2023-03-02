@@ -2,33 +2,33 @@ part of 'tv_popular_bloc.dart';
 
 abstract class TvPopularState extends Equatable {}
 
-class Initial extends TvPopularState {
+class TvPopularInitial extends TvPopularState {
   @override
   List<Object> get props => [];
 }
 
-class Loading extends TvPopularState {
+class TvPopularLoading extends TvPopularState {
   @override
   List<Object> get props => [];
 }
 
-class Success extends TvPopularState {
+class TvPopularSuccess extends TvPopularState {
   final List<Tv> tvResult;
 
-  Success(this.tvResult);
+  TvPopularSuccess(this.tvResult);
   @override
   List<Object> get props => [tvResult];
 }
 
-class Empty extends TvPopularState {
+class TvPopularEmpty extends TvPopularState {
   @override
   List<Object> get props => [];
 }
 
-class Error extends TvPopularState {
+class TvPopularError extends TvPopularState {
   final String message;
 
-  Error(this.message);
+  TvPopularError(this.message);
   @override
   List<Object> get props => [message];
 }

@@ -28,8 +28,8 @@ class _PopularTvPageState extends State<PopularTvPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<PopularTvNotifier>(
-          builder: (context, data, child) {
+        child: BlocBuilder<PopularTvNotifier>(
+          builder: (context, state) {
             if (data.state == RequestState.Loading) {
               return Center(
                 child: CircularProgressIndicator(),

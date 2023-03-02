@@ -12,20 +12,23 @@ class MovieRecommendationBloc
     extends Bloc<MovieRecommendationEvent, MovieRecommendationState> {
   final GetMovieRecommendationsUseCase _getMovieRecommendation;
 
-  MovieRecommendationBloc(this._getMovieRecommendation) : super(Empty()) {
+  MovieRecommendationBloc(this._getMovieRecommendation)
+      : super(MovieRecommendationInitial()) {
     on<OnGetRecommendation>(_onMovieRecommendation);
   }
 
   FutureOr<void> _onMovieRecommendation(
       OnGetRecommendation event, Emitter<MovieRecommendationState> emit) async {
     final id = event.movieId;
-    emit(Loading());
+    emit(MovieRecommendationLoading());
 
     final result = await _getMovieRecommendation.execute(id);
     result.fold((failure) {
-      emit(Error(failure.message));
+      emit(MovieRecommendationError(failure.message));
     }, (success) {
-      success.isEmpty ? emit(Empty()) : emit(Success(success));
+      success.isEmpty
+          ? emit(MovieRecommendationEmpty())
+          : emit(MovieRecommendationSuccess(success));
     });
   }
 }

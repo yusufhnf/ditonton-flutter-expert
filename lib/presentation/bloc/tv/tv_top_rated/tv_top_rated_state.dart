@@ -2,33 +2,33 @@ part of 'tv_top_rated_bloc.dart';
 
 abstract class TvTopRatedState extends Equatable {}
 
-class Initial extends TvTopRatedState {
+class TvTopRatedInitial extends TvTopRatedState {
   @override
   List<Object> get props => [];
 }
 
-class Loading extends TvTopRatedState {
+class TvTopRatedLoading extends TvTopRatedState {
   @override
   List<Object> get props => [];
 }
 
-class Success extends TvTopRatedState {
+class TvTopRatedSuccess extends TvTopRatedState {
   final List<Tv> tvResult;
 
-  Success(this.tvResult);
+  TvTopRatedSuccess(this.tvResult);
   @override
   List<Object> get props => [tvResult];
 }
 
-class Empty extends TvTopRatedState {
+class TvTopRatedEmpty extends TvTopRatedState {
   @override
   List<Object> get props => [];
 }
 
-class Error extends TvTopRatedState {
+class TvTopRatedError extends TvTopRatedState {
   final String message;
 
-  Error(this.message);
+  TvTopRatedError(this.message);
   @override
   List<Object> get props => [message];
 }

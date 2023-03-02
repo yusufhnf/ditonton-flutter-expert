@@ -29,8 +29,8 @@ class _NowPlayingTvPageState extends State<NowPlayingTvPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<NowPlayingTvNotifier>(
-          builder: (context, data, child) {
+        child: BlocBuilder<NowPlayingTvNotifier>(
+          builder: (context, state) {
             if (data.state == RequestState.Loading) {
               return Center(
                 child: CircularProgressIndicator(),

@@ -11,19 +11,19 @@ part 'movie_top_rated_state.dart';
 class MovieTopRatedBloc extends Bloc<MovieTopRatedEvent, MovieTopRatedState> {
   final GetTopRatedMoviesUseCase _getMovieTopRated;
 
-  MovieTopRatedBloc(this._getMovieTopRated) : super(Initial()) {
+  MovieTopRatedBloc(this._getMovieTopRated) : super(MovieTopRatedInitial()) {
     on<OnGetTopRated>(_onGetTopRated);
   }
 
   FutureOr<void> _onGetTopRated(
       OnGetTopRated event, Emitter<MovieTopRatedState> emit) async {
-    emit(Loading());
+    emit(MovieTopRatedLoading());
     final result = await _getMovieTopRated.execute();
 
     result.fold((failure) {
-      emit(Error(failure.message));
+      emit(MovieTopRatedError(failure.message));
     }, (success) {
-      emit(Success(success));
+      emit(MovieTopRatedSuccess(success));
     });
   }
 }

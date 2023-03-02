@@ -28,8 +28,8 @@ class _TopRatedTvPageState extends State<TopRatedTvPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<TopRatedTvNotifier>(
-          builder: (context, data, child) {
+        child: BlocBuilder<TopRatedTvNotifier>(
+          builder: (context, state) {
             if (data.state == RequestState.Loading) {
               return Center(
                 child: CircularProgressIndicator(),

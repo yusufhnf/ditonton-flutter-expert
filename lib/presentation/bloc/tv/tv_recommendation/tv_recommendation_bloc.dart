@@ -12,20 +12,23 @@ class TvRecommendationBloc
     extends Bloc<TvRecommendationEvent, TvRecommendationState> {
   final GetTvRecommendationsUseCase _getTvRecommendation;
 
-  TvRecommendationBloc(this._getTvRecommendation) : super(Empty()) {
+  TvRecommendationBloc(this._getTvRecommendation)
+      : super(TvRecommendationInitial()) {
     on<OnGetRecommendation>(_onTvRecommendation);
   }
 
   FutureOr<void> _onTvRecommendation(
       OnGetRecommendation event, Emitter<TvRecommendationState> emit) async {
     final id = event.tvId;
-    emit(Loading());
+    emit(TvRecommendationLoading());
 
     final result = await _getTvRecommendation.execute(id);
     result.fold((failure) {
-      emit(Error(failure.message));
+      emit(TvRecommendationError(failure.message));
     }, (success) {
-      success.isEmpty ? emit(Empty()) : emit(Success(success));
+      success.isEmpty
+          ? emit(TvRecommendationEmpty())
+          : emit(TvRecommendationSuccess(success));
     });
   }
 }

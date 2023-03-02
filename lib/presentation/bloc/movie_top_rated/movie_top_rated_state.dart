@@ -2,33 +2,33 @@ part of 'movie_top_rated_bloc.dart';
 
 abstract class MovieTopRatedState extends Equatable {}
 
-class Initial extends MovieTopRatedState {
+class MovieTopRatedInitial extends MovieTopRatedState {
   @override
   List<Object> get props => [];
 }
 
-class Loading extends MovieTopRatedState {
+class MovieTopRatedLoading extends MovieTopRatedState {
   @override
   List<Object> get props => [];
 }
 
-class Success extends MovieTopRatedState {
+class MovieTopRatedSuccess extends MovieTopRatedState {
   final List<Movie> movieResult;
 
-  Success(this.movieResult);
+  MovieTopRatedSuccess(this.movieResult);
   @override
   List<Object> get props => [movieResult];
 }
 
-class Empty extends MovieTopRatedState {
+class MovieTopRatedEmpty extends MovieTopRatedState {
   @override
   List<Object> get props => [];
 }
 
-class Error extends MovieTopRatedState {
+class MovieTopRatedError extends MovieTopRatedState {
   final String message;
 
-  Error(this.message);
+  MovieTopRatedError(this.message);
   @override
   List<Object> get props => [message];
 }

@@ -22,7 +22,7 @@ class MovieWatchlistBloc
 
   MovieWatchlistBloc(this._getWatchlistMovies, this._getWatchlistStatus,
       this._removeWatchlist, this._saveWatchlist)
-      : super(Initial()) {
+      : super(MovieWatchlistInitial()) {
     on<OnGetWatchlist>(_onGetMovieWatchlist);
     on<WatchlistStatus>(_onWatchlistStatus);
     on<AddWatchlist>(_onAddWatchlist);
@@ -31,13 +31,15 @@ class MovieWatchlistBloc
 
   FutureOr<void> _onGetMovieWatchlist(
       OnGetWatchlist event, Emitter<MovieWatchlistState> emit) async {
-    emit(Loading());
+    emit(MovieWatchlistLoading());
     final result = await _getWatchlistMovies.execute();
 
     result.fold((failure) {
-      emit(Error(failure.message));
+      emit(MovieWatchlistError(failure.message));
     }, (success) {
-      success.isEmpty ? emit(Empty()) : emit(Success(success));
+      success.isEmpty
+          ? emit(MovieWatchlistEmpty())
+          : emit(MovieWatchlistSuccess(success));
     });
   }
 
@@ -45,7 +47,7 @@ class MovieWatchlistBloc
       WatchlistStatus event, Emitter<MovieWatchlistState> emit) async {
     final id = event.movieId;
     final result = await _getWatchlistStatus.execute(id);
-    emit(IsWatchlist(result));
+    emit(MovieWatchlistIsWatchlist(result));
   }
 
   FutureOr<void> _onAddWatchlist(
@@ -54,9 +56,9 @@ class MovieWatchlistBloc
 
     final result = await _saveWatchlist.execute(movie);
     result.fold((failure) {
-      emit(Error(failure.message));
+      emit(MovieWatchlistError(failure.message));
     }, (success) {
-      emit(SuccessMessage(success));
+      emit(MovieWatchlistSuccessMessage(success));
     });
   }
 
@@ -65,9 +67,9 @@ class MovieWatchlistBloc
     final movie = event.movieDetail;
     final result = await _removeWatchlist.execute(movie);
     result.fold((failure) {
-      emit(Error(failure.message));
+      emit(MovieWatchlistError(failure.message));
     }, (success) {
-      emit(SuccessMessage(success));
+      emit(MovieWatchlistSuccessMessage(success));
     });
   }
 }

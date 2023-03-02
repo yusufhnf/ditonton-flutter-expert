@@ -2,52 +2,52 @@ part of 'movie_watchlist_bloc.dart';
 
 abstract class MovieWatchlistState extends Equatable {}
 
-class Initial extends MovieWatchlistState {
+class MovieWatchlistInitial extends MovieWatchlistState {
   @override
   List<Object?> get props => [];
 }
 
-class Loading extends MovieWatchlistState {
+class MovieWatchlistLoading extends MovieWatchlistState {
   @override
   List<Object?> get props => [];
 }
 
-class Success extends MovieWatchlistState {
+class MovieWatchlistSuccess extends MovieWatchlistState {
   final List<Movie> movieResult;
 
-  Success(this.movieResult);
+  MovieWatchlistSuccess(this.movieResult);
 
   @override
   List<Object?> get props => [movieResult];
 }
 
-class Empty extends MovieWatchlistState {
+class MovieWatchlistEmpty extends MovieWatchlistState {
   @override
   List<Object?> get props => [];
 }
 
-class Error extends MovieWatchlistState {
+class MovieWatchlistError extends MovieWatchlistState {
   final String message;
 
-  Error(this.message);
+  MovieWatchlistError(this.message);
 
   @override
   List<Object?> get props => [message];
 }
 
-class SuccessMessage extends MovieWatchlistState {
+class MovieWatchlistSuccessMessage extends MovieWatchlistState {
   final String message;
 
-  SuccessMessage(this.message);
+  MovieWatchlistSuccessMessage(this.message);
 
   @override
   List<Object?> get props => [message];
 }
 
-class IsWatchlist extends MovieWatchlistState {
+class MovieWatchlistIsWatchlist extends MovieWatchlistState {
   final bool isListed;
 
-  IsWatchlist(this.isListed);
+  MovieWatchlistIsWatchlist(this.isListed);
 
   @override
   List<Object?> get props => [isListed];
