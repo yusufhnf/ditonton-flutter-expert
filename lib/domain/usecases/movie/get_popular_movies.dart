@@ -3,10 +3,10 @@ import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/repositories/movie_repository.dart';
 
-class GetPopularMovies {
+class GetPopularMoviesUseCase {
   final MovieRepository repository;
 
-  GetPopularMovies(this.repository);
+  GetPopularMoviesUseCase(this.repository);
 
   Future<Either<Failure, List<Movie>>> execute() {
     return repository.getPopularMovies();

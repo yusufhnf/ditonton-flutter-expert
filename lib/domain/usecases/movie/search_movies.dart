@@ -3,10 +3,10 @@ import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/repositories/movie_repository.dart';
 
-class SearchMovies {
+class SearchMoviesUseCase {
   final MovieRepository repository;
 
-  SearchMovies(this.repository);
+  SearchMoviesUseCase(this.repository);
 
   Future<Either<Failure, List<Movie>>> execute(String query) {
     return repository.searchMovies(query);

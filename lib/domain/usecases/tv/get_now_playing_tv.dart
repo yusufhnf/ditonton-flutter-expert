@@ -3,10 +3,10 @@ import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/repositories/tv_repository.dart';
 import 'package:ditonton/common/failure.dart';
 
-class GetNowPlayingTv {
+class GetNowPlayingTvUseCase {
   final TvRepository repository;
 
-  GetNowPlayingTv(this.repository);
+  GetNowPlayingTvUseCase(this.repository);
 
   Future<Either<Failure, List<Tv>>> execute() {
     return repository.getNowPlayingTv();

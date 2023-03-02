@@ -3,10 +3,10 @@ import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:ditonton/domain/repositories/movie_repository.dart';
 
-class RemoveWatchlist {
+class RemoveWatchlistUseCase {
   final MovieRepository repository;
 
-  RemoveWatchlist(this.repository);
+  RemoveWatchlistUseCase(this.repository);
 
   Future<Either<Failure, String>> execute(MovieDetail movie) {
     return repository.removeWatchlist(movie);

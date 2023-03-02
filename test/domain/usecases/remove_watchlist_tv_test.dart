@@ -7,12 +7,12 @@ import '../../dummy_data/tv_dummy_objects.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late RemoveWatchlistTv usecase;
+  late RemoveWatchlistTvUseCase usecase;
   late MockTvRepository mockTvRepository;
 
   setUp(() {
     mockTvRepository = MockTvRepository();
-    usecase = RemoveWatchlistTv(mockTvRepository);
+    usecase = RemoveWatchlistTvUseCase(mockTvRepository);
   });
 
   test('should remove watchlist tv from repository', () async {

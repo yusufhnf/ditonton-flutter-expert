@@ -7,12 +7,12 @@ import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late RemoveWatchlist usecase;
+  late RemoveWatchlistUseCase usecase;
   late MockMovieRepository mockMovieRepository;
 
   setUp(() {
     mockMovieRepository = MockMovieRepository();
-    usecase = RemoveWatchlist(mockMovieRepository);
+    usecase = RemoveWatchlistUseCase(mockMovieRepository);
   });
 
   test('should remove watchlist movie from repository', () async {

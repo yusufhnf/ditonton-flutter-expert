@@ -7,12 +7,12 @@ import 'package:mockito/mockito.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late GetTvRecommendations usecase;
+  late GetTvRecommendationsUseCase usecase;
   late MockTvRepository mockTvRepository;
 
   setUp(() {
     mockTvRepository = MockTvRepository();
-    usecase = GetTvRecommendations(mockTvRepository);
+    usecase = GetTvRecommendationsUseCase(mockTvRepository);
   });
 
   final tId = 1;

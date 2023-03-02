@@ -3,10 +3,10 @@ import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/repositories/tv_repository.dart';
 
-class SearchTv {
+class SearchTvUseCase {
   final TvRepository repository;
 
-  SearchTv(this.repository);
+  SearchTvUseCase(this.repository);
 
   Future<Either<Failure, List<Tv>>> execute(String query) {
     return repository.searchTv(query);

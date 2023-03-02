@@ -13,13 +13,13 @@ import 'package:ditonton/domain/usecases/movie/get_watchlist_status.dart';
 import 'package:ditonton/domain/usecases/movie/remove_watchlist.dart';
 import 'package:ditonton/domain/usecases/movie/save_watchlist.dart';
 import 'package:ditonton/domain/usecases/movie/search_movies.dart';
-import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
-import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
-import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
-import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
-import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
-import 'package:ditonton/presentation/provider/tv/now_playing_tv_notifier.dart';
-import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
+import 'package:ditonton/presentation/bloc/movie_detail/movie_detail_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie_now_playing/movie_now_playing_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie_popular/movie_popular_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie_recommendation/movie_recommendation_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie_search/movie_search_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie_top_rated/movie_top_rated_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie_watchlist/movie_watchlist_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
 
@@ -38,118 +38,101 @@ import 'domain/usecases/tv/get_watchlist_tv_status.dart';
 import 'domain/usecases/tv/remove_watchlist_tv.dart';
 import 'domain/usecases/tv/save_watchlist_tv.dart';
 import 'domain/usecases/tv/search_tv.dart';
-import 'presentation/provider/tv/popular_tv_notifier.dart';
-import 'presentation/provider/tv/top_rated_tv_notifier.dart';
-import 'presentation/provider/tv/tv_detail_notifier.dart';
-import 'presentation/provider/tv/tv_list_notifier.dart';
-import 'presentation/provider/tv/tv_search_notifier.dart';
-import 'presentation/provider/tv/watchlist_tv_notifier.dart';
+import 'presentation/bloc/tv/tv_detail/tv_detail_bloc.dart';
+import 'presentation/bloc/tv/tv_now_playing/tv_now_playing_bloc.dart';
+import 'presentation/bloc/tv/tv_popular/tv_popular_bloc.dart';
+import 'presentation/bloc/tv/tv_recommendation/tv_recommendation_bloc.dart';
+import 'presentation/bloc/tv/tv_search/tv_search_bloc.dart';
+import 'presentation/bloc/tv/tv_top_rated/tv_top_rated_bloc.dart';
+import 'presentation/bloc/tv/tv_watchlist/tv_watchlist_bloc.dart';
 
 final locator = GetIt.instance;
 
 void init() {
-  // provider
+  // bloc
   locator.registerFactory(
-    () => MovieListNotifier(
-      getNowPlayingMovies: locator(),
-      getPopularMovies: locator(),
-      getTopRatedMovies: locator(),
-    ),
+    () => MovieNowPlayingBloc(locator()),
   );
   locator.registerFactory(
-    () => MovieDetailNotifier(
-      getMovieDetail: locator(),
-      getMovieRecommendations: locator(),
-      getWatchListStatus: locator(),
-      saveWatchlist: locator(),
-      removeWatchlist: locator(),
-    ),
+    () => MovieDetailBloc(locator()),
   );
   locator.registerFactory(
-    () => MovieSearchNotifier(
-      searchMovies: locator(),
-    ),
-  );
-  locator.registerFactory(
-    () => PopularMoviesNotifier(
+    () => MovieSearchBloc(
       locator(),
     ),
   );
   locator.registerFactory(
-    () => TopRatedMoviesNotifier(
-      getTopRatedMovies: locator(),
+    () => MoviePopularBloc(
+      locator(),
     ),
   );
   locator.registerFactory(
-    () => WatchlistMovieNotifier(
-      getWatchlistMovies: locator(),
+    () => MovieRecommendationBloc(
+      locator(),
     ),
+  );
+  locator.registerFactory(
+    () => MovieTopRatedBloc(
+      locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => MovieWatchlistBloc(locator(), locator(), locator(), locator()),
   );
 
   locator.registerFactory(
-    () => TvListNotifier(
-      getNowPlayingTv: locator(),
-      getPopularTv: locator(),
-      getTopRatedTv: locator(),
-    ),
+    () => TvNowPlayingBloc(locator()),
   );
   locator.registerFactory(
-    () => NowPlayingTvNotifier(
+    () => TvDetailBloc(locator()),
+  );
+  locator.registerFactory(
+    () => TvSearchBloc(
       locator(),
     ),
   );
   locator.registerFactory(
-    () => TvDetailNotifier(
-      getTvDetail: locator(),
-      getTvRecommendations: locator(),
-      getWatchListStatus: locator(),
-      saveWatchlist: locator(),
-      removeWatchlist: locator(),
-    ),
-  );
-  locator.registerFactory(
-    () => TvSearchNotifier(
-      searchTv: locator(),
-    ),
-  );
-  locator.registerFactory(
-    () => PopularTvNotifier(
+    () => TvPopularBloc(
       locator(),
     ),
   );
   locator.registerFactory(
-    () => TopRatedTvNotifier(
-      getTopRatedTv: locator(),
+    () => TvRecommendationBloc(
+      locator(),
     ),
   );
   locator.registerFactory(
-    () => WatchlistTvNotifier(
-      getWatchlistTv: locator(),
+    () => TvTopRatedBloc(
+      locator(),
     ),
+  );
+  locator.registerFactory(
+    () => TvWatchlistBloc(locator(), locator(), locator(), locator()),
   );
 
   // use case
-  locator.registerLazySingleton(() => GetNowPlayingMovies(locator()));
-  locator.registerLazySingleton(() => GetPopularMovies(locator()));
-  locator.registerLazySingleton(() => GetTopRatedMovies(locator()));
-  locator.registerLazySingleton(() => GetMovieDetail(locator()));
-  locator.registerLazySingleton(() => GetMovieRecommendations(locator()));
-  locator.registerLazySingleton(() => SearchMovies(locator()));
-  locator.registerLazySingleton(() => GetWatchListStatus(locator()));
-  locator.registerLazySingleton(() => SaveWatchlist(locator()));
-  locator.registerLazySingleton(() => RemoveWatchlist(locator()));
-  locator.registerLazySingleton(() => GetWatchlistMovies(locator()));
+  locator.registerLazySingleton(() => GetNowPlayingMoviesUseCase(locator()));
+  locator.registerLazySingleton(() => GetPopularMoviesUseCase(locator()));
+  locator.registerLazySingleton(() => GetTopRatedMoviesUseCase(locator()));
+  locator.registerLazySingleton(() => GetMovieDetailUseCase(locator()));
+  locator
+      .registerLazySingleton(() => GetMovieRecommendationsUseCase(locator()));
+  locator.registerLazySingleton(() => SearchMoviesUseCase(locator()));
+  locator.registerLazySingleton(() => GetWatchListStatusUseCase(locator()));
+  locator.registerLazySingleton(() => SaveWatchlistUseCase(locator()));
+  locator.registerLazySingleton(() => RemoveWatchlistUseCase(locator()));
+  locator.registerLazySingleton(() => GetWatchlistMoviesUseCase(locator()));
 
-  locator.registerLazySingleton(() => GetNowPlayingTv(locator()));
-  locator.registerLazySingleton(() => GetPopularTv(locator()));
-  locator.registerLazySingleton(() => GetTopRatedTv(locator()));
-  locator.registerLazySingleton(() => GetTvDetail(locator()));
-  locator.registerLazySingleton(() => GetTvRecommendations(locator()));
-  locator.registerLazySingleton(() => SearchTv(locator()));
-  locator.registerLazySingleton(() => GetWatchListTvStatus(locator()));
-  locator.registerLazySingleton(() => SaveWatchlistTv(locator()));
-  locator.registerLazySingleton(() => RemoveWatchlistTv(locator()));
-  locator.registerLazySingleton(() => GetWatchlistTv(locator()));
+  locator.registerLazySingleton(() => GetNowPlayingTvUseCase(locator()));
+  locator.registerLazySingleton(() => GetPopularTvUseCase(locator()));
+  locator.registerLazySingleton(() => GetTopRatedTvUseCase(locator()));
+  locator.registerLazySingleton(() => GetTvDetailUseCase(locator()));
+  locator.registerLazySingleton(() => GetTvRecommendationsUseCase(locator()));
+  locator.registerLazySingleton(() => SearchTvUseCase(locator()));
+  locator.registerLazySingleton(() => GetWatchListTvStatusUseCase(locator()));
+  locator.registerLazySingleton(() => SaveWatchlistTvUseCase(locator()));
+  locator.registerLazySingleton(() => RemoveWatchlistTvUseCase(locator()));
+  locator.registerLazySingleton(() => GetWatchlistTvUseCase(locator()));
 
   // repository
   locator.registerLazySingleton<MovieRepository>(
