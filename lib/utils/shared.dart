@@ -11,7 +11,7 @@ class Shared {
 
     try {
       List<int> bytes = [];
-      bytes = (await rootBundle.load('certificates/certificates.crt'))
+      bytes = (await rootBundle.load('assets/certificates.crt'))
           .buffer
           .asUint8List();
       context.setTrustedCertificatesBytes(bytes);

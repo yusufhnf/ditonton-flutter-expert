@@ -34,8 +34,12 @@ import 'presentation/pages/tv/top_rated_tv_page.dart';
 import 'presentation/pages/tv/tv_detail_page.dart';
 import 'presentation/pages/tv/tv_search_page.dart';
 import 'presentation/pages/tv/watchlist_tv_page.dart';
+import 'utils/http_ssl_pinning.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await HttpSSLPinning.init();
   di.init();
   runApp(MyApp());
 }
