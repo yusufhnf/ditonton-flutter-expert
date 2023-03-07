@@ -23,7 +23,9 @@ class MoviePopularBloc extends Bloc<MoviePopularEvent, MoviePopularState> {
     result.fold((failure) {
       emit(MoviePopularError(failure.message));
     }, (success) {
-      emit(MoviePopularSuccess(success));
+      success.isEmpty
+          ? emit(MoviePopularEmpty())
+          : emit(MoviePopularSuccess(success));
     });
   }
 }

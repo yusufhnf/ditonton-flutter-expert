@@ -26,7 +26,9 @@ class MovieNowPlayingBloc
     result.fold((failure) {
       emit(MovieNowPlayingError(failure.message));
     }, (success) {
-      emit(MovieNowPlayingSuccess(success));
+      success.isEmpty
+          ? emit(MovieNowPlayingEmpty())
+          : emit(MovieNowPlayingSuccess(success));
     });
   }
 }

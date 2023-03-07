@@ -3,6 +3,8 @@ part of 'movie_watchlist_bloc.dart';
 abstract class MovieWatchlistEvent extends Equatable {}
 
 class OnGetWatchlist extends MovieWatchlistEvent {
+  OnGetWatchlist();
+
   @override
   List<Object?> get props => [];
 }

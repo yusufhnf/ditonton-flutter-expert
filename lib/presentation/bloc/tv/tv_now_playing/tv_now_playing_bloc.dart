@@ -23,7 +23,9 @@ class TvNowPlayingBloc extends Bloc<TvNowPlayingEvent, TvNowPlayingState> {
     result.fold((failure) {
       emit(TvNowPlayingError(failure.message));
     }, (success) {
-      emit(TvNowPlayingSuccess(success));
+      success.isEmpty
+          ? emit(TvNowPlayingEmpty())
+          : emit(TvNowPlayingSuccess(success));
     });
   }
 }

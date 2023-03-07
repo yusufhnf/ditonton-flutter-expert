@@ -23,7 +23,9 @@ class MovieTopRatedBloc extends Bloc<MovieTopRatedEvent, MovieTopRatedState> {
     result.fold((failure) {
       emit(MovieTopRatedError(failure.message));
     }, (success) {
-      emit(MovieTopRatedSuccess(success));
+      success.isEmpty
+          ? emit(MovieTopRatedEmpty())
+          : emit(MovieTopRatedSuccess(success));
     });
   }
 }

@@ -6,15 +6,14 @@ import 'package:ditonton/presentation/pages/movie_detail_page.dart';
 import 'package:ditonton/presentation/pages/popular_movies_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
-import 'package:ditonton/presentation/pages/tv/home_tv_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
-import 'package:ditonton/common/state_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/movie_now_playing/movie_now_playing_bloc.dart';
 import '../bloc/movie_popular/movie_popular_bloc.dart';
 import '../bloc/movie_top_rated/movie_top_rated_bloc.dart';
+import 'tv/home_tv_page.dart';
 import 'tv/watchlist_tv_page.dart';
 
 class HomeMoviePage extends StatefulWidget {
@@ -107,14 +106,17 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               ),
               BlocBuilder<MovieNowPlayingBloc, MovieNowPlayingState>(
                   builder: (context, state) {
-                if (state is MovieNowPlayingState.Loading) {
+                if (state is MovieNowPlayingEmpty) {
+                  return Center(child: Center(child: Text('Data empty')));
+                } else if (state is MovieNowPlayingLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state == RequestState.Loaded) {
-                  return MovieList(data.nowPlayingMovies);
+                } else if (state is MovieNowPlayingSuccess) {
+                  final data = state.movieResult;
+                  return MovieList(data);
                 } else {
-                  return Text('Failed');
+                  return SizedBox.shrink();
                 }
               }),
               _buildSubHeading(
@@ -124,15 +126,16 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               ),
               BlocBuilder<MoviePopularBloc, MoviePopularState>(
                   builder: (context, state) {
-                final state = data.popularMoviesState;
-                if (state == RequestState.Loading) {
+                if (state is MoviePopularEmpty) {
+                  return Center(child: Text('Data empty'));
+                } else if (state is MoviePopularLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state == RequestState.Loaded) {
-                  return MovieList(data.popularMovies);
+                } else if (state is MoviePopularSuccess) {
+                  return MovieList(state.movieResult);
                 } else {
-                  return Text('Failed');
+                  return SizedBox.shrink();
                 }
               }),
               _buildSubHeading(
@@ -142,15 +145,16 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               ),
               BlocBuilder<MovieTopRatedBloc, MovieTopRatedState>(
                   builder: (context, state) {
-                final state = data.topRatedMoviesState;
-                if (state == RequestState.Loading) {
+                if (state is MovieTopRatedEmpty) {
+                  return Center(child: Text('Data empty'));
+                } else if (state is MovieTopRatedLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state == RequestState.Loaded) {
-                  return MovieList(data.topRatedMovies);
+                } else if (state is MovieTopRatedSuccess) {
+                  return MovieList(state.movieResult);
                 } else {
-                  return Text('Failed');
+                  return SizedBox.shrink();
                 }
               }),
             ],

@@ -23,7 +23,9 @@ class TvTopRatedBloc extends Bloc<TvTopRatedEvent, TvTopRatedState> {
     result.fold((failure) {
       emit(TvTopRatedError(failure.message));
     }, (success) {
-      emit(TvTopRatedSuccess(success));
+      success.isEmpty
+          ? emit(TvTopRatedEmpty())
+          : emit(TvTopRatedSuccess(success));
     });
   }
 }

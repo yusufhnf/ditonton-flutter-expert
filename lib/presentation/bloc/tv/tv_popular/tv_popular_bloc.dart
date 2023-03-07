@@ -24,7 +24,9 @@ class TvPopularBloc extends Bloc<TvPopularEvent, TvPopularState> {
     result.fold((failure) {
       emit(TvPopularError(failure.message));
     }, (success) {
-      emit(TvPopularSuccess(success));
+      success.isEmpty
+          ? emit(TvPopularEmpty())
+          : emit(TvPopularSuccess(success));
     });
   }
 }
