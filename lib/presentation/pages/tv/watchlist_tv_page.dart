@@ -3,6 +3,7 @@ import 'package:ditonton/presentation/widgets/tv_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../common/string_constants.dart';
 import '../../bloc/tv/tv_watchlist/tv_watchlist_bloc.dart';
 
 class WatchlistTvPage extends StatefulWidget {
@@ -36,14 +37,14 @@ class _WatchlistTvPageState extends State<WatchlistTvPage> with RouteAware {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Watchlist'),
+        title: Text(StringConstant.watchlist),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<TvWatchlistBloc, TvWatchlistState>(
           builder: (context, state) {
             if (state is TvWatchlistEmpty) {
-              return Center(child: Text('Data empty'));
+              return Center(child: Text(StringConstant.dataEmpty));
             } else if (state is TvWatchlistLoading) {
               return Center(
                 child: CircularProgressIndicator(),

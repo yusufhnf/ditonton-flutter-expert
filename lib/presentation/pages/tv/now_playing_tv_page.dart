@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
+import '../../../common/string_constants.dart';
+
 class NowPlayingTvPage extends StatefulWidget {
   static const ROUTE_NAME = '/nowplaying-tv';
 
@@ -23,14 +25,14 @@ class _NowPlayingTvPageState extends State<NowPlayingTvPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Now Playing Tv'),
+        title: Text(StringConstant.nowPlayingTv),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<TvNowPlayingBloc, TvNowPlayingState>(
           builder: (context, state) {
             if (state is TvNowPlayingEmpty) {
-              return Center(child: Text('Data empty'));
+              return Center(child: Text(StringConstant.dataEmpty));
             } else if (state is TvNowPlayingLoading) {
               return Center(
                 child: CircularProgressIndicator(),

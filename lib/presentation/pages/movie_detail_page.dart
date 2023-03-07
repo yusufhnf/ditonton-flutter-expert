@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
+import 'package:ditonton/common/string_constants.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:ditonton/presentation/bloc/movie_detail/movie_detail_bloc.dart';
@@ -44,7 +45,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
       body: BlocBuilder<MovieDetailBloc, MovieDetailState>(
         builder: (context, state) {
           if (state is MovieDetailEmpty) {
-            return Center(child: Text('Data empty'));
+            return Center(child: Text(StringConstant.dataEmpty));
           } else if (state is MovieDetailLoading) {
             return Center(
               child: CircularProgressIndicator(),
@@ -127,7 +128,7 @@ class _DetailContentState extends State<DetailContent> {
                                   widget.isListedWatchlist
                                       ? Icon(Icons.check)
                                       : Icon(Icons.add),
-                                  Text('Watchlist'),
+                                  Text(StringConstant.watchlist),
                                 ],
                               ),
                             ),
@@ -153,7 +154,7 @@ class _DetailContentState extends State<DetailContent> {
                             ),
                             SizedBox(height: 16),
                             Text(
-                              'Overview',
+                              StringConstant.overview,
                               style: kHeading6,
                             ),
                             Text(
@@ -161,14 +162,15 @@ class _DetailContentState extends State<DetailContent> {
                             ),
                             SizedBox(height: 16),
                             Text(
-                              'Recommendations',
+                              StringConstant.recommendation,
                               style: kHeading6,
                             ),
                             BlocBuilder<MovieRecommendationBloc,
                                 MovieRecommendationState>(
                               builder: (context, state) {
                                 if (state is MovieRecommendationEmpty) {
-                                  return Center(child: Text('Data empty'));
+                                  return Center(
+                                      child: Text(StringConstant.dataEmpty));
                                 } else if (state
                                     is MovieRecommendationLoading) {
                                   return Center(
@@ -295,13 +297,16 @@ class _DetailContentState extends State<DetailContent> {
 
     if (state is MovieWatchlistIsWatchlist) {
       final isAdded = state.isListed;
-      message = isAdded == false ? "Add to Watchlist" : "Remove from Watchlist";
+      message = isAdded == false
+          ? StringConstant.addToWatchlist
+          : StringConstant.removeFromWatchlist;
     } else {
       message = !widget.isListedWatchlist
-          ? "Add to Watchlist"
-          : "Remove from Watchlist";
+          ? StringConstant.addToWatchlist
+          : StringConstant.removeFromWatchlist;
     }
-    if (message == "Add to Watchlist" || message == "Remove from Watchlist") {
+    if (message == StringConstant.addToWatchlist ||
+        message == StringConstant.removeFromWatchlist) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(message)));
     } else {

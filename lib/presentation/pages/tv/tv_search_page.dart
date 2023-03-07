@@ -3,6 +3,7 @@ import 'package:ditonton/presentation/widgets/tv_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../common/string_constants.dart';
 import '../../bloc/tv/tv_search/tv_search_bloc.dart';
 
 class TvSearchPage extends StatelessWidget {
@@ -12,7 +13,7 @@ class TvSearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Search'),
+        title: Text(StringConstant.search),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -24,7 +25,7 @@ class TvSearchPage extends StatelessWidget {
                 context.read<TvSearchBloc>().add(OnGetSearch(query));
               },
               decoration: InputDecoration(
-                hintText: 'Search title',
+                hintText: StringConstant.searchTitle,
                 prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(),
               ),
@@ -32,13 +33,13 @@ class TvSearchPage extends StatelessWidget {
             ),
             SizedBox(height: 16),
             Text(
-              'Search Result',
+              StringConstant.searchResult,
               style: kHeading6,
             ),
             BlocBuilder<TvSearchBloc, TvSearchState>(
               builder: (context, state) {
                 if (state is TvSearchEmpty) {
-                  return Center(child: Text('Data empty'));
+                  return Center(child: Text(StringConstant.dataEmpty));
                 } else if (state is TvSearchLoading) {
                   return Center(
                     child: CircularProgressIndicator(),

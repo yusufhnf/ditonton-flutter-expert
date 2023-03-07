@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
+import 'package:ditonton/common/string_constants.dart';
 import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Ditonton'),
+        title: Text(StringConstant.tvSeries),
         actions: [
           IconButton(
             onPressed: () {
@@ -51,14 +52,14 @@ class _HomeTvPageState extends State<HomeTvPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildSubHeading(
-                title: 'Now Playing',
+                title: StringConstant.nowPlaying,
                 onTap: () =>
                     Navigator.pushNamed(context, NowPlayingTvPage.ROUTE_NAME),
               ),
               BlocBuilder<TvNowPlayingBloc, TvNowPlayingState>(
                   builder: (context, state) {
                 if (state is TvNowPlayingEmpty) {
-                  return Center(child: Text('Data empty'));
+                  return Center(child: Text(StringConstant.dataEmpty));
                 } else if (state is TvNowPlayingLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
@@ -71,14 +72,14 @@ class _HomeTvPageState extends State<HomeTvPage> {
                 }
               }),
               _buildSubHeading(
-                title: 'Popular',
+                title: StringConstant.popular,
                 onTap: () =>
                     Navigator.pushNamed(context, PopularTvPage.ROUTE_NAME),
               ),
               BlocBuilder<TvPopularBloc, TvPopularState>(
                   builder: (context, state) {
                 if (state is TvPopularEmpty) {
-                  return Center(child: Text('Data empty'));
+                  return Center(child: Text(StringConstant.dataEmpty));
                 } else if (state is TvPopularLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
@@ -90,14 +91,14 @@ class _HomeTvPageState extends State<HomeTvPage> {
                 }
               }),
               _buildSubHeading(
-                title: 'Top Rated',
+                title: StringConstant.topRated,
                 onTap: () =>
                     Navigator.pushNamed(context, TopRatedTvPage.ROUTE_NAME),
               ),
               BlocBuilder<TvTopRatedBloc, TvTopRatedState>(
                   builder: (context, state) {
                 if (state is TvTopRatedEmpty) {
-                  return Center(child: Text('Data empty'));
+                  return Center(child: Text(StringConstant.dataEmpty));
                 } else if (state is TvTopRatedLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
@@ -128,7 +129,10 @@ class _HomeTvPageState extends State<HomeTvPage> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
-              children: [Text('See More'), Icon(Icons.arrow_forward_ios)],
+              children: [
+                Text(StringConstant.seeMore),
+                Icon(Icons.arrow_forward_ios)
+              ],
             ),
           ),
         ),

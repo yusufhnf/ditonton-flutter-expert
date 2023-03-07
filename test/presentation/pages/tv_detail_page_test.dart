@@ -136,14 +136,14 @@ void main() {
   testWidgets(
       'Watchlist button should display AlertDialog when add to watchlist failed',
       (WidgetTester tester) async {
-    whenListen(mockTvDetailBloc,
-        Stream.fromIterable([TvDetailLoading(), TvDetailError('Failed')]),
-        initialState: TvDetailInitial());
-    whenListen(
-        mockTvWatchlistBloc,
-        Stream.fromIterable(
-            [TvWatchlistLoading(), TvWatchlistIsWatchlist(false)]),
-        initialState: TvWatchlistInitial());
+    when(() => mockTvDetailBloc.state)
+        .thenAnswer((invocation) => TvDetailLoading());
+    when(() => mockTvDetailBloc.state)
+        .thenAnswer((invocation) => TvDetailError('Failed'));
+    when(() => mockTvWatchlistBloc.state)
+        .thenAnswer((invocation) => TvWatchlistLoading());
+    when(() => mockTvWatchlistBloc.state)
+        .thenAnswer((invocation) => TvWatchlistError('Failed'));
 
     await tester.pumpWidget(
       _makeTestableWidget(TvDetailPage(id: tId)),

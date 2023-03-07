@@ -1,3 +1,4 @@
+import 'package:ditonton/common/string_constants.dart';
 import 'package:ditonton/common/utils.dart';
 import 'package:ditonton/presentation/bloc/movie_watchlist/movie_watchlist_bloc.dart';
 import 'package:ditonton/presentation/widgets/movie_card_list.dart';
@@ -36,14 +37,14 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Watchlist'),
+        title: Text(StringConstant.watchlist),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<MovieWatchlistBloc, MovieWatchlistState>(
           builder: (context, state) {
             if (state is MovieWatchlistEmpty) {
-              return Center(child: Text('Data empty'));
+              return Center(child: Text(StringConstant.dataEmpty));
             } else if (state is MovieWatchlistLoading) {
               return Center(
                 child: CircularProgressIndicator(),

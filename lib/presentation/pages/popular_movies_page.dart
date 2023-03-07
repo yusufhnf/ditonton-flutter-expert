@@ -1,3 +1,4 @@
+import 'package:ditonton/common/string_constants.dart';
 import 'package:ditonton/presentation/bloc/movie_popular/movie_popular_bloc.dart';
 import 'package:ditonton/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
@@ -23,14 +24,14 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Popular Movies'),
+        title: Text(StringConstant.popularMovies),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<MoviePopularBloc, MoviePopularState>(
           builder: (context, state) {
             if (state is MoviePopularEmpty) {
-              return Center(child: Text('Data empty'));
+              return Center(child: Text(StringConstant.dataEmpty));
             } else if (state is MoviePopularLoading) {
               return Center(
                 child: CircularProgressIndicator(),

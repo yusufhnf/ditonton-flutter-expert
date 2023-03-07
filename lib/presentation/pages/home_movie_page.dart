@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
+import 'package:ditonton/common/string_constants.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
@@ -42,33 +43,33 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               currentAccountPicture: CircleAvatar(
                 backgroundImage: AssetImage('assets/circle-g.png'),
               ),
-              accountName: Text('Ditonton'),
+              accountName: Text(StringConstant.appTitle),
               accountEmail: Text('ditonton@dicoding.com'),
             ),
             ListTile(
               leading: Icon(Icons.movie),
-              title: Text('Movies'),
+              title: Text(StringConstant.movies),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
               leading: Icon(Icons.tv),
-              title: Text('TV Series'),
+              title: Text(StringConstant.tvSeries),
               onTap: () {
                 Navigator.pushNamed(context, HomeTvPage.ROUTE_NAME);
               },
             ),
             ListTile(
               leading: Icon(Icons.save_alt),
-              title: Text('Movies Watchlist'),
+              title: Text(StringConstant.moviesWatchlist),
               onTap: () {
                 Navigator.pushNamed(context, WatchlistMoviesPage.ROUTE_NAME);
               },
             ),
             ListTile(
               leading: Icon(Icons.save_alt),
-              title: Text('TV Watchlist'),
+              title: Text(StringConstant.tvWatchlist),
               onTap: () {
                 Navigator.pushNamed(context, WatchlistTvPage.ROUTE_NAME);
               },
@@ -78,13 +79,13 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 Navigator.pushNamed(context, AboutPage.ROUTE_NAME);
               },
               leading: Icon(Icons.info_outline),
-              title: Text('About'),
+              title: Text(StringConstant.about),
             ),
           ],
         ),
       ),
       appBar: AppBar(
-        title: Text('Ditonton'),
+        title: Text(StringConstant.appTitle),
         actions: [
           IconButton(
             onPressed: () {
@@ -101,13 +102,14 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Now Playing',
+                StringConstant.nowPlaying,
                 style: kHeading6,
               ),
               BlocBuilder<MovieNowPlayingBloc, MovieNowPlayingState>(
                   builder: (context, state) {
                 if (state is MovieNowPlayingEmpty) {
-                  return Center(child: Center(child: Text('Data empty')));
+                  return Center(
+                      child: Center(child: Text(StringConstant.dataEmpty)));
                 } else if (state is MovieNowPlayingLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
@@ -120,14 +122,14 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 }
               }),
               _buildSubHeading(
-                title: 'Popular',
+                title: StringConstant.popular,
                 onTap: () =>
                     Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME),
               ),
               BlocBuilder<MoviePopularBloc, MoviePopularState>(
                   builder: (context, state) {
                 if (state is MoviePopularEmpty) {
-                  return Center(child: Text('Data empty'));
+                  return Center(child: Text(StringConstant.dataEmpty));
                 } else if (state is MoviePopularLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
@@ -139,14 +141,14 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 }
               }),
               _buildSubHeading(
-                title: 'Top Rated',
+                title: StringConstant.topRated,
                 onTap: () =>
                     Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
               ),
               BlocBuilder<MovieTopRatedBloc, MovieTopRatedState>(
                   builder: (context, state) {
                 if (state is MovieTopRatedEmpty) {
-                  return Center(child: Text('Data empty'));
+                  return Center(child: Text(StringConstant.dataEmpty));
                 } else if (state is MovieTopRatedLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
@@ -177,7 +179,10 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
-              children: [Text('See More'), Icon(Icons.arrow_forward_ios)],
+              children: [
+                Text(StringConstant.seeMore),
+                Icon(Icons.arrow_forward_ios)
+              ],
             ),
           ),
         ),

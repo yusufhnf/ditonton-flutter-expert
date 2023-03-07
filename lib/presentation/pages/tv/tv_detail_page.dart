@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
+import '../../../common/string_constants.dart';
 import '../../bloc/tv/tv_detail/tv_detail_bloc.dart';
 import '../../bloc/tv/tv_recommendation/tv_recommendation_bloc.dart';
 import '../../bloc/tv/tv_watchlist/tv_watchlist_bloc.dart';
@@ -43,7 +44,7 @@ class _TvDetailPageState extends State<TvDetailPage> {
       body: BlocBuilder<TvDetailBloc, TvDetailState>(
         builder: (context, state) {
           if (state is TvDetailEmpty) {
-            return Center(child: Text('Data empty'));
+            return Center(child: Text(StringConstant.dataEmpty));
           } else if (state is TvDetailLoading) {
             return Center(
               child: CircularProgressIndicator(),
@@ -126,7 +127,7 @@ class _DetailContentState extends State<DetailContent> {
                                   widget.isListedWatchlist
                                       ? Icon(Icons.check)
                                       : Icon(Icons.add),
-                                  Text('Watchlist'),
+                                  Text(StringConstant.watchlist),
                                 ],
                               ),
                             ),
@@ -149,7 +150,7 @@ class _DetailContentState extends State<DetailContent> {
                             ),
                             SizedBox(height: 16),
                             Text(
-                              'Overview',
+                              StringConstant.overview,
                               style: kHeading6,
                             ),
                             Text(
@@ -157,15 +158,15 @@ class _DetailContentState extends State<DetailContent> {
                             ),
                             SizedBox(height: 16),
                             Text(
-                              'Total Episode',
+                              StringConstant.totalEpisode,
                               style: kHeading6,
                             ),
                             Text(
-                              "${widget.tv.numberOfEpisodes} Episode",
+                              "${widget.tv.numberOfEpisodes} ${StringConstant.episode}",
                             ),
                             SizedBox(height: 16),
                             Text(
-                              'Seasons',
+                              StringConstant.season,
                               style: kHeading6,
                             ),
                             Container(
@@ -201,19 +202,20 @@ class _DetailContentState extends State<DetailContent> {
                                       itemCount: widget.tv.seasons.length,
                                     )
                                   : Center(
-                                      child: Text("No Season"),
+                                      child: Text(StringConstant.noSeason),
                                     ),
                             ),
                             SizedBox(height: 16),
                             Text(
-                              'Recommendations',
+                              StringConstant.recommendation,
                               style: kHeading6,
                             ),
                             BlocBuilder<TvRecommendationBloc,
                                 TvRecommendationState>(
                               builder: (context, state) {
                                 if (state is TvRecommendationEmpty) {
-                                  return Center(child: Text('Data empty'));
+                                  return Center(
+                                      child: Text(StringConstant.dataEmpty));
                                 } else if (state is TvRecommendationLoading) {
                                   return Center(
                                     child: CircularProgressIndicator(),
@@ -327,13 +329,16 @@ class _DetailContentState extends State<DetailContent> {
 
     if (state is TvWatchlistIsWatchlist) {
       final isAdded = state.isListed;
-      message = isAdded == false ? "Add to Watchlist" : "Remove from Watchlist";
+      message = isAdded == false
+          ? StringConstant.addToWatchlist
+          : StringConstant.removeFromWatchlist;
     } else {
       message = !widget.isListedWatchlist
-          ? "Add to Watchlist"
-          : "Remove from Watchlist";
+          ? StringConstant.addToWatchlist
+          : StringConstant.removeFromWatchlist;
     }
-    if (message == "Add to Watchlist" || message == "Remove from Watchlist") {
+    if (message == StringConstant.addToWatchlist ||
+        message == StringConstant.removeFromWatchlist) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(message)));
     } else {

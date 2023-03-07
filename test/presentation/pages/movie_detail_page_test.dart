@@ -136,14 +136,14 @@ void main() {
   testWidgets(
       'Watchlist button should display AlertDialog when add to watchlist failed',
       (WidgetTester tester) async {
-    whenListen(mockMovieDetailBloc,
-        Stream.fromIterable([MovieDetailLoading(), MovieDetailError('Failed')]),
-        initialState: MovieDetailInitial());
-    whenListen(
-        mockMovieWatchlistBloc,
-        Stream.fromIterable(
-            [MovieWatchlistLoading(), MovieWatchlistIsWatchlist(false)]),
-        initialState: MovieWatchlistInitial());
+    when(() => mockMovieDetailBloc.state)
+        .thenAnswer((invocation) => MovieDetailLoading());
+    when(() => mockMovieDetailBloc.state)
+        .thenAnswer((invocation) => MovieDetailError('Failed'));
+    when(() => mockMovieWatchlistBloc.state)
+        .thenAnswer((invocation) => MovieWatchlistLoading());
+    when(() => mockMovieWatchlistBloc.state)
+        .thenAnswer((invocation) => MovieWatchlistError('Failed'));
 
     await tester.pumpWidget(
       _makeTestableWidget(MovieDetailPage(id: tId)),
