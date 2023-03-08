@@ -9,6 +9,7 @@ workflows:
     triggering:
       events:
         - push
+        - pull_request
       branch_patterns:
         - pattern: 'master'
           include: true
@@ -36,4 +37,7 @@ workflows:
     publishing:
       email:
         recipients:
-          - flyme.yusuf@gmail.com
+        - flyme.yusuf@gmail.com
+        notify:
+          success: true # To not receive a notification when a build succeeds
+          failure: true # To not receive a notification when a build fails
