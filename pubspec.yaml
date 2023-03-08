@@ -41,6 +41,21 @@ dependencies:
   flutter_bloc: ^8.1.2
   bloc_test: ^9.1.1
 
+  core:
+    path: core
+
+  search:
+    path: search
+
+  movie:
+    path: movie
+
+  tv:
+    path: tv
+
+  about:
+    path: about
+
 dev_dependencies:
   mockito: ^5.0.8
   build_runner: ^2.0.4

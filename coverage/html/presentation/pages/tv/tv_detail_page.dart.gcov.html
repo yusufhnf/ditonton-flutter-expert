@@ -73,7 +73,7 @@
 <a name="11"><span class="lineNum">      11 </span>            : import '../../bloc/tv/tv_watchlist/tv_watchlist_bloc.dart';</a>
 <a name="12"><span class="lineNum">      12 </span>            : </a>
 <a name="13"><span class="lineNum">      13 </span>            : class TvDetailPage extends StatefulWidget {</a>
-<a name="14"><span class="lineNum">      14 </span>            :   static const ROUTE_NAME = '/detail-tv';</a>
+<a name="14"><span class="lineNum">      14 </span>            :   static const routeName = '/detail-tv';</a>
 <a name="15"><span class="lineNum">      15 </span>            : </a>
 <a name="16"><span class="lineNum">      16 </span>            :   final int id;</a>
 <a name="17"><span class="lineNum">      17 </span><span class="lineCov">          1 :   TvDetailPage({required this.id});</span></a>
@@ -295,7 +295,7 @@
 <a name="233"><span class="lineNum">     233 </span><span class="lineNoCov">          0 :                                             onTap: () {</span></a>
 <a name="234"><span class="lineNum">     234 </span><span class="lineNoCov">          0 :                                               Navigator.pushReplacementNamed(</span></a>
 <a name="235"><span class="lineNum">     235 </span>            :                                                 context,</a>
-<a name="236"><span class="lineNum">     236 </span>            :                                                 TvDetailPage.ROUTE_NAME,</a>
+<a name="236"><span class="lineNum">     236 </span>            :                                                 TvDetailPage.routeName,</a>
 <a name="237"><span class="lineNum">     237 </span><span class="lineNoCov">          0 :                                                 arguments: tv.id,</span></a>
 <a name="238"><span class="lineNum">     238 </span>            :                                               );</a>
 <a name="239"><span class="lineNum">     239 </span>            :                                             },</a>
