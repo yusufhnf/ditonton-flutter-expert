@@ -1,6 +1,3 @@
-# Automatically generated on 2021-10-28 UTC from https://codemagic.io/app/616844a22286884de5e2c2a2/settings
-# Note that this configuration is not an exact match to UI settings. Review and adjust as necessary.
-
 workflows:
   default-workflow:
     name: Build Workflow
