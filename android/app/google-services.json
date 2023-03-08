@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "847799625542",
+    "project_id": "ditonton-3be0e",
+    "storage_bucket": "ditonton-3be0e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847799625542:android:7d0bf9535df0cdbfe4a747",
+        "android_client_info": {
+          "package_name": "com.meetucup.ditonton"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "847799625542-tbm9qkh7bsga21ekrcjm40hiqbf4nnfh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSUYT-lVENUdX8dTMOPVx3C1GFgfdzRhc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "847799625542-tbm9qkh7bsga21ekrcjm40hiqbf4nnfh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "847799625542-6ccdoue1cvuc2skmisjecb2ufdgus05u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dicoding.ditonton"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

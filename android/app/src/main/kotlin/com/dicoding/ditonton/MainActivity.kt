@@ -1,4 +1,4 @@
-package com.dicoding.ditonton
+package com.meetucup.ditonton
 
 import io.flutter.embedding.android.FlutterActivity
 
