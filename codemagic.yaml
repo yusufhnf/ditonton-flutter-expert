@@ -15,17 +15,17 @@ workflows:
           source: true
     scripts:
       - name: Add Dart SDK to PATH
-         script: |
-           echo PATH="$PATH":"$FLUTTER_ROOT/.pub-cache/bin" >> $CM_ENV
-           echo PATH="$PATH":"$FLUTTER_ROOT/bin" >> $CM_ENV           
+          script: |
+            echo PATH="$PATH":"$FLUTTER_ROOT/.pub-cache/bin" >> $CM_ENV
+            echo PATH="$PATH":"$FLUTTER_ROOT/bin" >> $CM_ENV           
       
       - name: Melos Bootstrap
-         script: |
-          dart pub global activate melos
-          melos bootstrap          
+          script: |
+            dart pub global activate melos
+            melos bootstrap          
 
       - name: Run Tests
-         script: melos run test
+          script: melos run test
     artifacts:
       - build/**/outputs/apk/**/*.apk
       - build/**/outputs/bundle/**/*.aab
