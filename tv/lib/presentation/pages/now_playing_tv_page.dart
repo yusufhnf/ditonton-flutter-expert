@@ -10,7 +10,7 @@ class NowPlayingTvPage extends StatefulWidget {
   const NowPlayingTvPage({super.key});
 
   @override
-  _NowPlayingTvPageState createState() => _NowPlayingTvPageState();
+  State<NowPlayingTvPage> createState() => _NowPlayingTvPageState();
 }
 
 class _NowPlayingTvPageState extends State<NowPlayingTvPage> {

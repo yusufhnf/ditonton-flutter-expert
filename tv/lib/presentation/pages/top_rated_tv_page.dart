@@ -10,7 +10,7 @@ class TopRatedTvPage extends StatefulWidget {
   const TopRatedTvPage({super.key});
 
   @override
-  _TopRatedTvPageState createState() => _TopRatedTvPageState();
+  State<TopRatedTvPage> createState() => _TopRatedTvPageState();
 }
 
 class _TopRatedTvPageState extends State<TopRatedTvPage> {

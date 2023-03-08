@@ -10,7 +10,7 @@ class WatchlistTvPage extends StatefulWidget {
   const WatchlistTvPage({super.key});
 
   @override
-  _WatchlistTvPageState createState() => _WatchlistTvPageState();
+  State<WatchlistTvPage> createState() => _WatchlistTvPageState();
 }
 
 class _WatchlistTvPageState extends State<WatchlistTvPage> with RouteAware {
