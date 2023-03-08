@@ -4,7 +4,6 @@ packages:
   - movie
   - tv
   - core
-  - search
   
 scripts:
   test:
