@@ -25,15 +25,14 @@ void main() {
 
   group('get Now Playing Tv', () {
     final tTvList = TvResponseModel.fromJson(
-            json.decode(readJson('dummy_data/tv_now_playing.json')))
+            json.decode(readJson('dummy_data/tv_nowplaying.json')))
         .tvList;
-
     test('should return list of Tv Model when the response code is 200',
         () async {
       // arrange
       when(mockHttpClient.get(Uri.parse('$baseUrl/tv/on_the_air?$apiKey')))
           .thenAnswer((_) async =>
-              http.Response(readJson('dummy_data/tv_now_playing.json'), 200));
+              http.Response(readJson('dummy_data/tv_nowplaying.json'), 200));
       // act
       final result = await dataSource.getNowPlayingTv();
       // assert
@@ -57,7 +56,6 @@ void main() {
     final tTvList = TvResponseModel.fromJson(
             json.decode(readJson('dummy_data/tv_popular.json')))
         .tvList;
-
     test('should return list of tvs when response is success (200)', () async {
       // arrange
       when(mockHttpClient.get(Uri.parse('$baseUrl/tv/popular?$apiKey')))
